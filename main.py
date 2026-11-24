@@ -8,6 +8,7 @@ The script validates the line and drops it into /output/entry.txt.
 """
 
 from pathlib import Path
+import sys
 
 # The vow itself: one sentence, exactly 136 characters.
 VOW = (
@@ -37,13 +38,19 @@ def validate(line: str) -> str:
     return text
 
 
-def main() -> None:
-    text = validate(VOW)
+def main() -> int:
+    """Validate the vow, write it out, return 0; return 1 on bad input."""
+    try:
+        text = validate(VOW)
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     OUTPUT_FILE.write_text(text, encoding="utf-8")
     print(text)
     print(f"Wrote {len(text)} chars to {OUTPUT_FILE}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

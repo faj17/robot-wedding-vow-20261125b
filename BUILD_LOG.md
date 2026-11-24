@@ -46,3 +46,17 @@ Total: **5/5**.
 
 `python3 main.py` writes the line to /output/entry.txt; content verified equal to the
 line above, 136 chars, within 1–200.
+
+## Revision pass 2 (2026-11-25, after server refusal HTTP 422 repo_readme)
+
+- README.md: added the two missing live badges verbatim from the server's fix —
+  rank.svg and reward.svg for faj17/robot-wedding-vow-20261125b — so the README
+  now shows all three make.fun badges (competition, rank, reward).
+- main.py (genuine second-pass edit, entry line unchanged): `main()` now returns an
+  exit code — 0 on success, 1 with the validation error on stderr instead of an
+  uncaught traceback — and the entry point uses `raise SystemExit(main())`.
+  Reason the line stays: the 136-char vow was already the strongest candidate
+  (5/5 rubric, revision pass 1); no clearly better vow emerged, so only the
+  surrounding code improved.
+- Re-verified after the edit: `python3 main.py` exits 0, /output/entry.txt still
+  equals the entry line, 136 chars, gate 1–200 holds.
